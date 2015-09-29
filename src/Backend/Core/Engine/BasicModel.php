@@ -97,9 +97,9 @@ class BasicModel
     /**
      * Get a single record
      *
-     * @param string $table        Database table name.
-     * @param array  $whereValues  Values for where query
-     * @param string $where        Where query
+     * @param string               $table        Database table name.
+     * @param array, int, string   $whereValues  Values for where query
+     * @param string               $where        Where query
      *
      * @return array
      */
@@ -115,9 +115,9 @@ class BasicModel
     /**
      * Get record translations indexed by language
      *
-     * @param string $table        Database table name.
-     * @param array  $whereValues  Values for where query
-     * @param string $where        Where query
+     * @param string              $table        Database table name.
+     * @param array, int, string  $whereValues  Values for where query
+     * @param string              $where        Where query
      *
      * @return array
      */
@@ -135,5 +135,23 @@ class BasicModel
         }
 
         return $result;
+    }
+
+    /**
+     * Check if record exists
+     *
+     * @param string $table        Database table name.
+     * @param array  $whereValues  Values for where query
+     * @param string $where        Where query
+     *
+     * @return bool
+     */
+    public static function exists($table, $whereValues, $where = 'id = ?')
+    {
+        return (bool) BackendModel::getContainer()->get('database')->getVar(
+            'SELECT 1
+             FROM '.$table.'
+             WHERE '.$where,
+            $whereValues);
     }
 }

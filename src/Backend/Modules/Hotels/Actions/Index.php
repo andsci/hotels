@@ -32,8 +32,15 @@ class Index extends BackendBaseActionIndex
         // set column URLs
         $this->dgHotels->setColumnURL(
             'title',
-            BackendModel::createURLForAction('Edit') .
+            BackendModel::createURLForAction('Rooms') .
             '&amp;id=[id]'
+        );
+
+        $this->dgHotels->setColumnFunction(
+            array(new BackendDataGridFunctions(), 'showImage'),
+            array(FRONTEND_FILES_URL . '/hotels/images/64x64' ,'[image]'),
+            'image',
+            true
         );
 
         // add edit column
@@ -45,11 +52,34 @@ class Index extends BackendBaseActionIndex
             '&amp;id=[id]',
             BL::lbl('Edit')
         );
+
+        $this->dgHotels->setColumnFunction(
+            array(__CLASS__, 'setCountText'),
+            array('[room_count]', '[id]'),
+            'room_count',
+            true
+        );
     }
 
     protected function parse()
     {
         parent::parse();
         $this->tpl->assign('dgHotels', (string) $this->dgHotels->getContent());
+    }
+
+    public static function setCountText($count, $id)
+    {
+        switch($count){
+            case 0:
+                return '<a href="' . BackendModel::createURLForAction('Rooms') . '&id='. $id .'">' . BL::lbl('NoRooms') . '</a>';
+                break;
+            case 1:
+                return '<a href="' . BackendModel::createURLForAction('Rooms') . '&id='. $id .'">'. 1 . ' ' . BL::lbl('Room') . '</a>';
+                break;
+            default:
+                return '<a href="' . BackendModel::createURLForAction('Rooms') . '&id='. $id .'">' . $count . BL::lbl('Rooms') . '</a>';
+                break;
+        }
+
     }
 }
