@@ -18,7 +18,7 @@ class Model extends  BasicModel
          GROUP BY h.id';
 
     const QRY_DATAGRID_BROWSE_ROOMS =
-        'SELECT hr.id, hr.image, hr.title
+        'SELECT hr.id, hr.image, hr.title, hr.count AS `rooms`, hr.price
          FROM hotels_rooms AS hr
          WHERE hotel_id = ?';
 }
