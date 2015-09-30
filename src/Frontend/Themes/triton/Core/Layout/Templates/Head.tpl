@@ -27,6 +27,10 @@
 		<link rel="stylesheet" href="{$cssFiles.file}" />
 	{/iteration:cssFiles}
 
+	<link rel="stylesheet" href="{$THEME_URL}/Core/Layout/Css/Plugins/bootstrap.css" />
+	<link rel="stylesheet" href="{$THEME_URL}/Core/Layout/Css/Plugins/datepicker.min.css" />
+	<link rel="stylesheet" href="{$THEME_URL}/Core/Layout/Css/main.css" />
+
 	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

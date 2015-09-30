@@ -1,0 +1,32 @@
+<?php
+
+namespace Frontend\Modules\Bookings\Ajax;
+
+use Frontend\Core\Engine\Base\AjaxAction as FrontendBaseAJAXAction;
+use Frontend\Core\Engine\Model as FrontendModel;
+use Frontend\Core\Engine\Navigation as FrontendNavigation;
+use Frontend\Modules\Bookings\Engine\Model as FrontendBookingsModel;
+use Frontend\Core\Engine\Template AS Template;
+
+class GetRooms extends FrontendBaseAJAXAction
+{
+    /**
+     * Execute the action
+     */
+    public function execute()
+    {
+        parent::execute();
+
+        $hotelId = \SpoonFilter::getPostValue('hotel_id', null, 0);
+
+        $rooms = FrontendBookingsModel::getRooms($hotelId);
+
+        $tpl = FRONTEND_MODULES_PATH . '/Bookings/Layout/Templates/Rooms.tpl';
+        $roomsTpl = new Template(false);
+        $roomsTpl->assign('rooms', $rooms);
+        $html = $roomsTpl->getContent( $tpl, true, true);
+
+        // output
+        $this->output(self::OK, $html);
+    }
+}

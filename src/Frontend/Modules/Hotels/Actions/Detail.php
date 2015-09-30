@@ -7,16 +7,24 @@ use Frontend\Core\Engine\Navigation as FrontendNavigation;
 use Frontend\Core\Engine\Model as FrontendModel;
 use Frontend\Modules\Hotels\Engine\Model as FrontendHotelsModel;
 
-// Get all hotels
-class Index extends FrontendBaseBlock
+// Get Hotel Rooms
+class Detail extends FrontendBaseBlock
 {
-    private $hotels;
+    private $id;
+
+    private $rooms;
 
     /**
      * Execute the extra
      */
     public function execute()
     {
+        $this->id = $this->URL->getParameter(1);
+
+        // validate incoming parameters
+        if ($this->id === null) {
+            $this->redirect(FrontendNavigation::getURL(404));
+        }
         parent::execute();
         $this->loadTemplate();
         $this->getData();
@@ -25,10 +33,10 @@ class Index extends FrontendBaseBlock
 
     private function getData()
     {
-        $this->hotels = FrontendHotelsModel::getAllRecords('hotels');
+        $this->rooms = FrontendHotelsModel::getRooms($this->id);
 
-        foreach($this->hotels AS &$hotel) {
-            $hotel['image'] = FRONTEND_FILES_URL . '/hotels/images/source/' . $hotel['image'];
+        foreach($this->rooms AS &$room) {
+            $room['image'] = FRONTEND_FILES_URL . '/rooms/images/source/' . $room['image'];
         }
     }
 
@@ -37,7 +45,7 @@ class Index extends FrontendBaseBlock
      */
     private function parse()
     {
-        echo json_encode($this->hotels);die;
+        echo json_encode($this->rooms);die;
     }
 }
 

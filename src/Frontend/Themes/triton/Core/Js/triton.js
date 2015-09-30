@@ -1,31 +1,21 @@
-$(document).ready(function()
-{
-	// a-img problem
-	$('.content a > img').parent().addClass('linkedImage');
+$(document).ready(function(){
+	var date = new Date();
+	$('.datepicker').datepicker({
+        startDate : date,
+        format: 'yyyy/mm/dd'
+    }).data('datepicker');
 
-	// p-img problem
-	$('.content p img').each(function(i)
-	{
-		// get parent (p)
-		var parent = $(this).parents('p').get(0);
+    var startInput = $('input.date-start');
+    var endInput = $('input.date-end');
 
-		// copy of parent
-		parentCopy = $(parent).clone();
+    startInput.change(function(){
+        var date = new Date(this.value);
+        date.setDate(date.getDate() + 1);
+        endInput.data('datepicker').setStartDate(date);
 
-		// get all images inside parent
-		parentCopy.find('img').each(function()
-		{
-			if($(this).hasClass('alignLeft') || $(this).hasClass('alignRight'))
-			{
-				if($(this).parent('a').length) $(this).parent('a').remove();
-				else $(this).remove();
-			}
-		});
-
-		// no more content left = only images so we'll add a class to the container
-		if(!parentCopy.html().replace(/\s*/g, '')) parent.addClass('floatedImage');
-	});
-
-	// enable the share-menu
-	if($('.share').length > 0) $('.share').shareMenu();
+        if(new Date(endInput.val()) < date) {
+            console.log('nulinasi');
+            endInput.val('');
+        }
+    });
 });
