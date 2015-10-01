@@ -77,7 +77,7 @@ class Index extends BackendBaseActionIndex
                 return '<a href="' . BackendModel::createURLForAction('Rooms') . '&id='. $id .'">'. 1 . ' ' . BL::lbl('Room') . '</a>';
                 break;
             default:
-                return '<a href="' . BackendModel::createURLForAction('Rooms') . '&id='. $id .'">' . $count . BL::lbl('Rooms') . '</a>';
+                return '<a href="' . BackendModel::createURLForAction('Rooms') . '&id='. $id .'">' . $count . ' ' . BL::lbl('Rooms') . '</a>';
                 break;
         }
 

@@ -58,7 +58,7 @@
             <span class="title">Order</span>
         </div>
         <div class="sub-title">Room information</div>
-        <div id="order-detail"></div>
+        <div id="order-detail" class="clearfix"></div>
         <div class="sub-title">Client information</div>
         <form id="client-form" class="form-horizontal">
             <div class="form-group">

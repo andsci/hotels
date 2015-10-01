@@ -30,7 +30,7 @@ class GetRoom extends FrontendBaseAJAXAction
             $this->output(self::ERROR, 'Room not found');
         }
 
-        $room['stay_duration'] = (strtotime($room['departure']) - strtotime($room['arrival'])) / (60 * 60 * 24);
+        $room['stay_duration'] = floor((strtotime($room['departure']) - strtotime($room['arrival'])) / (60 * 60 * 24));
         $room['total_price'] = $room['stay_duration'] * $room['price'];
 
         $tpl = FRONTEND_MODULES_PATH . '/Bookings/Layout/Templates/Room.tpl';

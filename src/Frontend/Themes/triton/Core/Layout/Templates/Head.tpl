@@ -29,7 +29,6 @@
 
 	<link rel="stylesheet" href="{$THEME_URL}/Core/Layout/Css/Plugins/bootstrap.css" />
 	<link rel="stylesheet" href="{$THEME_URL}/Core/Layout/Css/Plugins/datepicker.min.css" />
-	<link rel="stylesheet" href="{$THEME_URL}/Core/Layout/Css/main.css" />
 
 	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
 	<!--[if lt IE 9]>

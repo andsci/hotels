@@ -27,6 +27,12 @@ class GetRooms extends FrontendBaseAJAXAction
 
         $rooms = FrontendBookingsModel::getRooms($hotelId, $arrival, $departure);
 
+        foreach($rooms AS &$room){
+            if($room['available_rooms'] < 1){
+                $room['disabled'] = true;
+            }
+        }
+
         $tpl = FRONTEND_MODULES_PATH . '/Bookings/Layout/Templates/Rooms.tpl';
         $roomsTpl = new Template(false);
         $roomsTpl->assign('rooms', $rooms);
