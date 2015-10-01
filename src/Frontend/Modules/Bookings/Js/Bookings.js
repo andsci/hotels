@@ -87,14 +87,30 @@ jsFrontend.bookings =
     validateForm: function(form)
     {
         var isValid = true;
-        form.find('input').each(function() {
+        form.find('input[type="text"]').each(function() {
             if($(this).val() == ''){
                 $(this).closest('.form-group').addClass('has-error');
                 isValid = false;
+            } else {
+                $(this).closest('.form-group').removeClass('has-error');
+            }
+        });
+
+        form.find('input[type="email"]').each(function() {
+            if(!jsFrontend.bookings.isValidEmailAddress($(this).val())){
+                $(this).closest('.form-group').addClass('has-error');
+                isValid = false;
+            } else {
+                $(this).closest('.form-group').removeClass('has-error');
             }
         });
 
         return isValid;
+    },
+
+    isValidEmailAddress: function(emailAddress) {
+            var pattern = new RegExp(/^(("[\w-+\s]+")|([\w-+]+(?:\.[\w-+]+)*)|("[\w-+\s]+")([\w-+]+(?:\.[\w-+]+)*))(@((?:[\w-+]+\.)*\w[\w-+]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][\d]\.|1[\d]{2}\.|[\d]{1,2}\.))((25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\.){2}(25[0-5]|2[0-4][\d]|1[\d]{2}|[\d]{1,2})\]?$)/i);
+            return pattern.test(emailAddress);
     },
 
     initRoomSelect: function()
@@ -142,24 +158,30 @@ jsFrontend.bookings =
             var roomId = $('input:radio[name="room"]:checked').val();
             var arrival = $('input.date-start').val();
             var departure = $('input.date-end').val();
+            var clientName = $('input#client-name').val();
+            var clientEmail = $('input#client-email').val();
 
-            $.ajax(
-                {
-                    data:
+            if(jsFrontend.bookings.validateForm($('#client-form'))) {
+                $.ajax(
                     {
-                        fork: { module: 'Bookings', action: 'SendReservation' },
-                        room_id: roomId,
-                        arrival: arrival,
-                        departure: departure
-                    },
-                    success: function(response){
-                        $('#bookings-checkout').slideUp();
-                        $('#bookings-success').slideDown();
-                    },
-                    error: function(error){
-                        console.log(error);
-                    }
-                });
+                        data:
+                        {
+                            fork: { module: 'Bookings', action: 'SendReservation' },
+                            room_id: roomId,
+                            arrival: arrival,
+                            departure: departure,
+                            client_name: clientName,
+                            client_email: clientEmail
+                        },
+                        success: function(response){
+                            $('#bookings-checkout').slideUp();
+                            $('#bookings-success').slideDown();
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    });
+            }
         });
     }
 };

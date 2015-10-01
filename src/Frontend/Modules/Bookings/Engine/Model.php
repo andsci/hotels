@@ -31,9 +31,12 @@ class Model extends  BasicModel
         curl_setopt($ch,CURLOPT_URL, self::API_URL.$action);
         curl_setopt($ch,CURLOPT_POST, $param_number);
         curl_setopt($ch,CURLOPT_POSTFIELDS, $param_string);
+        curl_setopt($ch, CURLOPT_HEADER, 0);
 
-        //execute post
+        // remove null null echo
+        ob_start();
         $result = curl_exec($ch);
+        ob_end_clean();
 
         //close connection
         curl_close($ch);

@@ -197,3 +197,17 @@
 #bookings-success .success-message {
     padding: 45px;
 }
+
+.sub-title {
+    text-align: center;
+    font-size: 20px;
+    padding: 6px;
+}
+
+#client-form label {
+    height: 28px;
+}
+
+#client-form {
+    padding-top: 15px;
+}

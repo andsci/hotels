@@ -7,14 +7,11 @@
                         <div style="background-image: url('{$hotels.image}');" class="item-inner">
                         </div>
                         <div class="title">
-
                             <div class="wrapper">
                                 <div class="cell">
                                     {$hotels.title}
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 {/iteration:hotels}
@@ -58,9 +55,25 @@
     <div id="bookings-checkout" class="clearfix sub-page">
         <div class="navigation">
             <button class="btn btn-default back-button">Back</button>
-            <span class="title">Checkout</span>
+            <span class="title">Order</span>
         </div>
+        <div class="sub-title">Room information</div>
         <div id="order-detail"></div>
+        <div class="sub-title">Client information</div>
+        <form id="client-form" class="form-horizontal">
+            <div class="form-group">
+                <label for="client-name" class="col-sm-2 control-label">Your name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="client-name" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="client-email" class="col-sm-2 control-label">Your email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="client-email" placeholder="Email">
+                </div>
+            </div>
+        </form>
         <div class="wrapper tac">
             <button type="button" class="btn btn-default btn-lg reserve-btn">
                 <span class="" aria-hidden="true"></span> Reserve

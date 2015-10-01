@@ -21,14 +21,20 @@ class SendReservation extends FrontendBaseAJAXAction
         $room['arrival'] = \SpoonFilter::getPostValue('arrival', null, '');
         $room['departure'] = \SpoonFilter::getPostValue('departure', null, '');
         $room['client_name'] = \SpoonFilter::getPostValue('client_name', null, '');
+        $room['client_email'] = \SpoonFilter::getPostValue('client_email', null, '');
 
-        if(!$room['arrival']  || ! $room['departure'] || !$room['room_id'] || !$room['client_name']){
+        if(!$room['arrival']  || ! $room['departure'] || !$room['room_id'] || !$room['room_id']){
             $this->output(self::ERROR, 'Missing values');
         }
 
-        FrontendBookingsModel::reserveRoom($room);
+        $sent = FrontendBookingsModel::reserveRoom($room);
 
-        // output
-        $this->output(self::OK, 'success');
+        if($sent){
+            // output
+            $this->output(self::OK, 'Booking sent');
+        } else {
+            // output
+            $this->output(self::ERROR, 'Error sending');
+        }
     }
 }

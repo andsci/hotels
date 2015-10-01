@@ -45,16 +45,19 @@ class Rooms extends FrontendBaseBlock
 
     private function saveData()
     {
-        $data['room_id'] = \SpoonFilter::getPostValue('room_id', null, null);
-        $data['arrival'] = \SpoonFilter::getPostValue('arrival', null, null);
-        $data['departure'] = \SpoonFilter::getPostValue('departure', null, null);
-        $data['client_name'] = \SpoonFilter::getPostValue('client_name', null, null);
+        $booking['id'] = 0;
+        $booking['room_id'] = \SpoonFilter::getPostValue('room_id', null, null);
+        $booking['start'] = \SpoonFilter::getPostValue('arrival', null, null);
+        $booking['end'] = \SpoonFilter::getPostValue('departure', null, null);
+        $booking['client_name'] = \SpoonFilter::getPostValue('client_name', null, null);
+        $booking['client_email'] = \SpoonFilter::getPostValue('client_email', null, null);
+        $booking['date'] = FrontendModel::getUTCDate();
 
-        if($data['room_id'] && $data['arrival'] && $data['departure'] && $data['client_name']){
-            $bookingId = $this->addReservation($data);
+        if($booking['room_id'] && $booking['start'] && $booking['end'] && $booking['client_name']){
+            $booking['id'] = $this->addReservation($booking);
         }
 
-        echo json_encode($bookingId);die;
+        echo json_encode($booking['id']);die;
     }
 
     /**
