@@ -111,6 +111,7 @@
 
 .select-btn {
     margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 #bookings-detail {
@@ -156,4 +157,43 @@
 #bookings-checkout {
     display: none;
     padding: 10px;
+}
+
+#order-detail {
+    padding-top: 20px;
+}
+
+#order-detail .room-image-holder {
+    width: 50%;
+}
+
+#order-detail .room-table {
+    width: 50%;
+}
+
+#order-detail .room-image {
+    max-height: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding-right: 15px;
+}
+
+.fl {
+    float: left;
+}
+
+#bookings-success {
+    display :none;
+}
+
+#bookings-success .navigation {
+    padding-top: 10px;
+}
+
+#bookings-success .navigation .title {
+    padding-right: 0;
+}
+
+#bookings-success .success-message {
+    padding: 45px;
 }

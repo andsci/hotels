@@ -20,6 +20,27 @@ class Model extends  BasicModel
         return $data;
     }
 
+    private static function sendData($action = '', $param_string, $param_number)
+    {
+        if($action) $action = '/'.$action;
+
+        //open connection
+        $ch = curl_init();
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch,CURLOPT_URL, self::API_URL.$action);
+        curl_setopt($ch,CURLOPT_POST, $param_number);
+        curl_setopt($ch,CURLOPT_POSTFIELDS, $param_string);
+
+        //execute post
+        $result = curl_exec($ch);
+
+        //close connection
+        curl_close($ch);
+
+        return $result;
+    }
+
     public static function getHotels()
     {
         $data = self::getData();
@@ -32,5 +53,23 @@ class Model extends  BasicModel
         $data = self::getData('Detail', $hotelId);
 
         return $data;
+    }
+
+    public static function getRoom($roomId)
+    {
+        $data = self::getData('Rooms', $roomId);
+
+        return $data;
+    }
+
+    public static function reserveRoom($data)
+    {
+        $param_string = '';
+        foreach($data as $key=>$value) { $param_string .= $key.'='.$value.'&'; }
+        rtrim($param_string, '&');
+
+        $result = self::sendData('Rooms', $param_string, Count($data));
+
+        return $result;
     }
 }

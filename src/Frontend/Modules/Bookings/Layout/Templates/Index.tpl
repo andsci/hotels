@@ -60,10 +60,19 @@
             <button class="btn btn-default back-button">Back</button>
             <span class="title">Checkout</span>
         </div>
+        <div id="order-detail"></div>
         <div class="wrapper tac">
             <button type="button" class="btn btn-default btn-lg reserve-btn">
                 <span class="" aria-hidden="true"></span> Reserve
             </button>
+        </div>
+    </div>
+    <div id="bookings-success" class="clearfix sub-page">
+        <div class="navigation">
+            <span class="title">Reservation successfull</span>
+        </div>
+        <div class="success-message tac">
+            Your room has been reserved.
         </div>
     </div>
 </div>

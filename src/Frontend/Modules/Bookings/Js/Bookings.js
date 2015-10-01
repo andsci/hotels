@@ -13,6 +13,7 @@ jsFrontend.bookings =
         jsFrontend.bookings.initSearchButton();
         jsFrontend.bookings.initDateValidation();
         jsFrontend.bookings.initRoomSelect();
+        jsFrontend.bookings.initReservation();
     },
 
     initHotelMouseOver: function() {
@@ -61,9 +62,9 @@ jsFrontend.bookings =
                         success: function(response){
                             var roomList = $('#room-list');
                             if(response['data']){
-                                roomList.append(response['data']);
+                                roomList.html(response['data']);
                             } else {
-                                roomList.append('<div>No rooms available</div>');
+                                roomList.html('<div class="tac">No rooms available</div>');
                             }
                             $('#bookings-filter').slideUp();
                             $('#bookings-detail').slideDown();
@@ -72,8 +73,6 @@ jsFrontend.bookings =
                             console.log(error);
                         }
                     });
-
-
             }
         });
     },
@@ -108,10 +107,61 @@ jsFrontend.bookings =
         });
 
         $('.select-btn').click(function(){
-            $('#bookings-detail').slideUp();
-            $('#bookings-checkout').slideDown();
+            var roomId = $('input:radio[name="room"]:checked').val();
+            if(roomId){
+                var arrival = $('input.date-start').val();
+                var departure = $('input.date-end').val();
+
+                $.ajax(
+                    {
+                        data:
+                        {
+                            fork: { module: 'Bookings', action: 'GetRoom' },
+                            room_id: roomId,
+                            arrival: arrival,
+                            departure: departure
+                        },
+                        success: function(response){
+                            var order = $('#order-detail');
+                            order.html(response['data']);
+
+                            $('#bookings-detail').slideUp();
+                            $('#bookings-checkout').slideDown();
+                        },
+                        error: function(error){
+                            console.log(error);
+                        }
+                    });
+            }
         });
     },
+
+    initReservation: function()
+    {
+        $('.reserve-btn').click(function(){
+            var roomId = $('input:radio[name="room"]:checked').val();
+            var arrival = $('input.date-start').val();
+            var departure = $('input.date-end').val();
+
+            $.ajax(
+                {
+                    data:
+                    {
+                        fork: { module: 'Bookings', action: 'SendReservation' },
+                        room_id: roomId,
+                        arrival: arrival,
+                        departure: departure
+                    },
+                    success: function(response){
+                        $('#bookings-checkout').slideUp();
+                        $('#bookings-success').slideDown();
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                });
+        });
+    }
 };
 
 $(jsFrontend.bookings.init);
