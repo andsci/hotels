@@ -18,8 +18,14 @@ class GetRooms extends FrontendBaseAJAXAction
         parent::execute();
 
         $hotelId = \SpoonFilter::getPostValue('hotel_id', null, 0);
+        $arrival = \SpoonFilter::getPostValue('arrival', null, 0);
+        $departure = \SpoonFilter::getPostValue('departure', null, 0);
 
-        $rooms = FrontendBookingsModel::getRooms($hotelId);
+        if(!$hotelId && !$arrival && !$departure){
+            $this->output(self::ERROR, 'Missing values');
+        }
+
+        $rooms = FrontendBookingsModel::getRooms($hotelId, $arrival, $departure);
 
         $tpl = FRONTEND_MODULES_PATH . '/Bookings/Layout/Templates/Rooms.tpl';
         $roomsTpl = new Template(false);

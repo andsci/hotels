@@ -9,12 +9,12 @@ class Model extends  BasicModel
     const API_URL = 'http://hotel.dev.lt/hotels-api';
     const API_SECRET = '';
 
-    private static function getData($action = '', $id = null)
+    private static function getData($action = '', $id = null, $params = '')
     {
         if($action) $action = '/'.$action;
         if($id) $action = $action. '/'.$id;
 
-        $r = file_get_contents(self::API_URL.$action);
+        $r = file_get_contents(self::API_URL.$action.$params);
         $data = json_decode($r, true);
 
         return $data;
@@ -51,9 +51,11 @@ class Model extends  BasicModel
         return $data;
     }
 
-    public static function getRooms($hotelId)
+    public static function getRooms($hotelId, $arival, $departure)
     {
-        $data = self::getData('Detail', $hotelId);
+        $params = '?start='.$arival.'&end='.$departure;
+
+        $data = self::getData('Detail', $hotelId, $params);
 
         return $data;
     }

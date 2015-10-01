@@ -51,13 +51,18 @@ jsFrontend.bookings =
     initSearchButton: function() {
         $('.search-btn').click(function(){
             if(jsFrontend.bookings.validateForm($('form.date-form'))){
+                var arrival = $('input.date-start').val();
+                var departure = $('input.date-end').val();
+
                 $('#room-list').empty();
                 $.ajax(
                     {
                         data:
                         {
                             fork: { module: 'Bookings', action: 'GetRooms' },
-                            hotel_id: jsFrontend.bookings.hotel.id
+                            hotel_id: jsFrontend.bookings.hotel.id,
+                            arrival: arrival,
+                            departure: departure
                         },
                         success: function(response){
                             var roomList = $('#room-list');

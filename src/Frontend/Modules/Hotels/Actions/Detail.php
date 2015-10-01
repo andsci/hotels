@@ -33,7 +33,9 @@ class Detail extends FrontendBaseBlock
 
     private function getData()
     {
-        $this->rooms = FrontendHotelsModel::getRooms($this->id);
+        $start = $this->URL->getParameter('start');
+        $end = $this->URL->getParameter('end');
+        $this->rooms = FrontendHotelsModel::getRooms($this->id, $start, $end);
 
         foreach($this->rooms AS &$room) {
             $room['image'] = FRONTEND_FILES_URL . '/rooms/images/source/' . $room['image'];
