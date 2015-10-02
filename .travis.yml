@@ -7,4 +7,4 @@ intstall:
   - composer install --no-interaction
 before_script:
 script:
-  - bin/phpcs -p --standart=PSR2 --extensions=php ./src
+  - bin/phpcs -p --standard=PSR2 --extensions=php ./src
