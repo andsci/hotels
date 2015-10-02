@@ -1,10 +1,10 @@
 language: php
 php:
-	- 5.6
+  - 5.6
 services:
-	- mysql
+  - mysql
 intstall:
-	- composer install --no-interaction
+  - composer install --no-interaction
 before_script:
 script:
-	- bin/phpcs -p --standart=PSR2 --extensions=php ./src
+  - bin/phpcs -p --standart=PSR2 --extensions=php ./src
