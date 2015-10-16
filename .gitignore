@@ -8,9 +8,10 @@
 /app/cache/*
 /app/logs/*
 /backend/cache/navigation/
-/vendor/
+composer.lock
 /app/config/parameters.yml
 /bin/
 /bundles/
 /js/
 /css/
+/vendor/
