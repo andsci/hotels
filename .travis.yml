@@ -6,5 +6,6 @@ services:
 intstall:
   - composer install --no-interaction
 before_script:
+  - composer install --no-interaction
 script:
   - bin/phpcs -p --standard=PSR2 --extensions=php ./src
