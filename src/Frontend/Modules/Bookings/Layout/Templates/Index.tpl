@@ -36,6 +36,8 @@
             <button type="button" class="btn btn-default btn-lg search-btn">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span> Search
             </button>
+
+            <div id="museum-list"></div>
         </div>
     </div>
 

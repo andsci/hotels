@@ -59,7 +59,6 @@
 
 #bookings-filter {
 	display: none;
-	height: 250px;
 	padding:10px;
 }
 
@@ -313,4 +312,36 @@ body {
 	.jumbotron {
 		border-bottom: 0;
 	}
+}
+
+.museum .museum-image {
+	display: inline-block;
+	max-height: 200px;
+	max-width: 200px;
+}
+
+.museum .description {
+	display: inline-block;
+}
+
+.museum .description > span {
+	display: block;
+}
+
+.museum {
+	display: block;
+	width: 100%;
+	text-align: left;
+}
+
+.museum {
+	text-decoration: none;
+	padding-bottom: 15px;
+	text-underline: none;
+	margin-left: 100px;
+}
+
+#museum-list .list-title{
+	font-size: 20px;
+	padding: 50px 0 25px;
 }

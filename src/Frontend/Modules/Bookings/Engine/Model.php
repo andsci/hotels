@@ -60,6 +60,13 @@ class Model extends  BasicModel
         return $data;
     }
 
+    public static function getHotel($hotelId)
+    {
+        $data = self::getData('', $hotelId);
+
+        return $data;
+    }
+
     public static function getRoom($roomId)
     {
         $data = self::getData('Rooms', $roomId);
@@ -76,5 +83,15 @@ class Model extends  BasicModel
         $result = self::sendData('Rooms', $param_string, Count($data));
 
         return $result;
+    }
+
+    public static function getMuseums($country, $city)
+    {
+        $r = file_get_contents('http://www.muselia.com/apimuseums?city='.strtolower($city).'&country='.strtolower($country));
+        $data = json_decode($r, true);
+        if(isset($data['error'])){
+            return false;
+        }
+        return $data;
     }
 }

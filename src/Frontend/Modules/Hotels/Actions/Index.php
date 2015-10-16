@@ -10,7 +10,7 @@ use Frontend\Modules\Hotels\Engine\Model as FrontendHotelsModel;
 // Get all hotels
 class Index extends FrontendBaseBlock
 {
-    private $hotels;
+    private $record;
 
     /**
      * Execute the extra
@@ -25,11 +25,17 @@ class Index extends FrontendBaseBlock
 
     private function getData()
     {
-        $this->hotels = FrontendHotelsModel::getAllRecords('hotels');
 
-        foreach($this->hotels AS &$hotel) {
-            $hotel['image'] = FRONTEND_FILES_URL . '/hotels/images/source/' . $hotel['image'];
+        if($this->URL->getParameter(0) == null){
+            $this->record = FrontendHotelsModel::getAllRecords('hotels');
+
+            foreach($this->record AS &$hotel) {
+                $hotel['image'] = FRONTEND_FILES_URL . '/hotels/images/source/' . $hotel['image'];
+            }
+        } else {
+            $this->record = FrontendHotelsModel::getRecord('hotels', $this->URL->getParameter(0));
         }
+
     }
 
     /**
@@ -37,7 +43,7 @@ class Index extends FrontendBaseBlock
      */
     private function parse()
     {
-        echo json_encode($this->hotels);die;
+        echo json_encode($this->record);die;
     }
 }
 

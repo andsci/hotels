@@ -32,9 +32,26 @@ jsFrontend.bookings =
             var title = item.find('.title .cell').text();
             jsFrontend.bookings.hotel.id = id;
             jsFrontend.bookings.hotel.title = title;
-            $('#bookings-page').find('.hotel-name').text(title);
-            bookings.slideUp();
-            bookingsFilter.slideDown();
+
+            $.ajax(
+                {
+                    data:
+                    {
+                        fork: { module: 'Bookings', action: 'GetMuseums' },
+                        hotel_id: jsFrontend.bookings.hotel.id,
+                    },
+                    success: function(response){
+                        var museumList = $('#museum-list');
+                        museumList.html(response['data']);
+
+                        $('#bookings-page').find('.hotel-name').text(title);
+                        bookings.slideUp();
+                        bookingsFilter.slideDown();
+                    },
+                    error: function(error){
+                        console.log(error);
+                    }
+                });
         });
     },
 
