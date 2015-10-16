@@ -42,6 +42,8 @@ class Edit extends BackendBaseActionEdit
         $this->frm = new BackendForm('edit');
         $this->frm->addText('title', $this->record['title'], null, 'inputText title', 'inputTextError title');
         $this->frm->addImage('image');
+        $this->frm->addText('country', $this->record['country']);
+        $this->frm->addText('city', $this->record['city']);
         $this->frm->addCheckbox('delete_image');
     }
 
@@ -57,6 +59,8 @@ class Edit extends BackendBaseActionEdit
                 $item = [];
                 $item['id'] = $this->id;
                 $item['title'] = $fields['title']->getValue();
+                $item['country'] = $fields['country']->getValue();
+                $item['city'] = $fields['city']->getValue();
                 $item['image'] = $this->record['image'];
 
                 // the image path

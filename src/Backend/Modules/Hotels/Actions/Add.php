@@ -25,6 +25,8 @@ class Add extends BackendBaseActionAdd
     {
         $this->frm = new BackendForm('add');
         $this->frm->addText('title', null, null, 'inputText title', 'inputTextError title');
+        $this->frm->addText('country');
+        $this->frm->addText('city');
         $this->frm->addImage('image');
     }
 
@@ -39,6 +41,8 @@ class Add extends BackendBaseActionAdd
             if ($this->frm->isCorrect()) {
                 $item = [];
                 $item['title'] = $fields['title']->getValue();
+                $item['country'] = $fields['country']->getValue();
+                $item['city'] = $fields['city']->getValue();
                 $item['image'] = null;
 
                 if($fields['image']->isFilled())

@@ -9,7 +9,17 @@
     <table width="100%">
         <tr>
             <td id="leftColumn">
-                {$txtTitle} {$txtTitleError}
+                <div class="box">
+                    {$txtTitle} {$txtTitleError}
+                </div>
+                <div class="box">
+                    <label for="country">Country</label>
+                    {$txtCountry} {$txtCountryError}
+                </div>
+                <div class="box">
+                    <label for="city">City</label>
+                    {$txtCity} {$txtCityError}
+                </div>
             </td>
             <td id="sidebar">
                 <div class="box">
