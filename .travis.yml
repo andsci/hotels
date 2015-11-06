@@ -12,5 +12,5 @@ before_script:
 script:
 #  - bin/phpcs -p --standard=PSR2 --extensions=php ./src
   - php -S localhost:8000 &
-  - echo "localhost:8000" > casperDomain.txt
+  - echo "localhost:8000/" > casperDomain.txt
   - casperjs test casperTest.js
