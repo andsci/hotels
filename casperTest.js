@@ -7,7 +7,7 @@
 
 var fs = require('fs');
 var utils = require('utils');
-var domain = fs.read('casperDomain.txt');
+var domain = fs.read('casperDomain.txt').replace(/(\r\n|\n|\r)/gm,"");
 utils.dump(domain);
 
 casper.test.begin('Testing hotel booking', 9, function suite(test) {
