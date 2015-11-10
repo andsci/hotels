@@ -33,7 +33,7 @@ class Index extends FrontendBaseBlock
      */
     private function parse()
     {
-        $this->tpl->assign('hotels', $this->hotels);
+        $this->tpl->assign('hotels', $this->hotels?$this->hotels:false);
     }
 }
 
