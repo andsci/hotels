@@ -12,5 +12,5 @@ before_script:
 script:
 #  - bin/phpcs -p --standard=PSR2 --extensions=php ./src
   - php -S 127.0.0.1:8000 &
-  - echo "127.0.0.1:8000/" > casperDomain.txt
+  - echo "http://127.0.0.1:8000/" > casperDomain.txt
   - casperjs test casperTest.js
