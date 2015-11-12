@@ -1,6 +1,6 @@
 # README
 
-[![Build Status](https://travis-ci.org/forkcms/forkcms.svg?branch=testsuite)](https://travis-ci.org/forkcms/forkcms)
+[![Build Status](https://api.travis-ci.org/andsci/hotels.svg)](https://api.travis-ci.org/andsci/hotels)
 [![Latest Stable Version](https://poser.pugx.org/forkcms/forkcms/v/stable.svg)](https://packagist.org/packages/forkcms/forkcms)
 [![License](https://poser.pugx.org/forkcms/forkcms/license.svg)](https://packagist.org/packages/forkcms/forkcms)
 [![Code Coverage](https://scrutinizer-ci.com/g/forkcms/forkcms/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/forkcms/forkcms/?branch=master)
