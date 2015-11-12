@@ -4,6 +4,10 @@ php:
 services:
   - mysql
 before_script:
+  #apache configuration
+  - a2enmod rewrite
+  - /etc/init.d/apache2 restart
+  #database creation
   - mysql -e "create database hotels;"
   - mysql hotels < hotels.sql
   - cp app/config/parameters.yml.travis app/config/parameters.yml
