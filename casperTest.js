@@ -13,29 +13,12 @@ utils.dump(domain);
 casper.test.begin('Testing hotel booking', 9, function suite(test) {
     casper.start(domain + 'bookings', function() {
         test.assertTitle("Bookings - Hotels", "Page title is the one expected");
-        //test.assertExists('#bookings div.item[data-id="1"] .title .cell', "Hotel id 1 exists");
+        test.assertExists('#bookings div.item[data-id="1"] .title .cell', "Hotel id 1 exists");
 
 		//test.assertSelectorHasText('#bookings div.item[data-id="1"] .title .cell', 'Tonyresort', "Hotel name correct");
 		//test.assertEquals(casper.exists('#bookings div.item[data-id="1"] .item-inner'), true, 'Hotel box exists');
-		//this.click('#bookings div.item[data-id="1"] .item-inner');
+		this.click('#bookings div.item[data-id="1"] .item-inner');
     });
-
-
-	casper.thenOpen(domain + 'hotels-api', function(page){
-		var response = JSON.parse(this.fetchText('body'));
-		test.assertEquals(response.length, 4, "/api action works (hotel listing)");
-	});
-
-	casper.thenOpen(domain + 'hotels-api/detail/1?start=2015/12/20&end=2015/12/21', function(page){
-		var response = JSON.parse(this.fetchText('body'));
-		test.assertEquals(response.length, 3, "/api/detail/:id action works (rooms listing)");
-	});
-
-	casper.thenOpen(domain + 'hotels-api/rooms/2', function(page){
-		var response = JSON.parse(this.fetchText('body'));
-		test.assertEquals(response['title'], "Vip", "/api/rooms/:id action works (room info)");
-	});
-
 
 	// bookings filter page
     casper.then(function() {
