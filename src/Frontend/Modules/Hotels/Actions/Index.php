@@ -30,7 +30,7 @@ class Index extends FrontendBaseBlock
             $this->record = FrontendHotelsModel::getAllRecords('hotels');
 
             foreach($this->record AS &$hotel) {
-                $hotel['image'] = FRONTEND_FILES_URL . '/hotels/images/source/' . $hotel['image'];
+                $hotel['image'] = HOTELS_API_URL.FRONTEND_FILES_URL . '/hotels/images/source/' . $hotel['image'];
             }
         } else {
             $this->record = FrontendHotelsModel::getRecord('hotels', $this->URL->getParameter(0));

@@ -38,7 +38,7 @@ class Detail extends FrontendBaseBlock
         $this->rooms = FrontendHotelsModel::getRooms($this->id, $start, $end);
 
         foreach($this->rooms AS &$room) {
-            $room['image'] = FRONTEND_FILES_URL . '/rooms/images/source/' . $room['image'];
+            $room['image'] = HOTELS_API_URL.FRONTEND_FILES_URL . '/rooms/images/source/' . $room['image'];
         }
     }
 

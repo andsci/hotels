@@ -72,6 +72,7 @@ abstract class Kernel extends BaseKernel implements KernelInterface
         defined('SITE_PROTOCOL') || define('SITE_PROTOCOL', $container->getParameter('site.protocol'));
         defined('SITE_URL') || define('SITE_URL', SITE_PROTOCOL . '://' . SITE_DOMAIN);
         defined('HOTELS_API_URL') || define('HOTELS_API_URL', SITE_PROTOCOL . '://' . $container->getParameter('site.hotel_api_url'));
+        defined('HOTELS_API_PAGE') || define('HOTELS_API_PAGE', $container->getParameter('site.hotel_api_page'));
 
         defined('FORK_VERSION') || define('FORK_VERSION', $container->getParameter('fork.version'));
 

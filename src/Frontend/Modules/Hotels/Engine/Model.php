@@ -27,7 +27,7 @@ class Model extends  BasicModel
              WHERE hr.id = ?', array($room_id));
 
         if($room){
-            $room['image'] = FRONTEND_FILES_URL . '/rooms/images/source/' . $room['image'];
+            $room['image'] = HOTELS_API_URL.FRONTEND_FILES_URL . '/rooms/images/source/' . $room['image'];
         }
 
         return $room;
