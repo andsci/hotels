@@ -6,7 +6,6 @@ use Frontend\Core\Engine\Model as FrontendModel;
 
 class Model extends  BasicModel
 {
-    const API_URL = 'http://hotel.dev.lt/hotels-api';
     const API_SECRET = '';
 
     private static function getData($action = '', $id = null, $params = '')
@@ -14,7 +13,7 @@ class Model extends  BasicModel
         if($action) $action = '/'.$action;
         if($id) $action = $action. '/'.$id;
 
-        $r = file_get_contents(self::API_URL.$action.$params);
+        $r = file_get_contents(HOTELS_API_URL.$action.$params);
         $data = json_decode($r, true);
 
         return $data;
@@ -28,7 +27,7 @@ class Model extends  BasicModel
         $ch = curl_init();
 
         //set the url, number of POST vars, POST data
-        curl_setopt($ch,CURLOPT_URL, self::API_URL.$action);
+        curl_setopt($ch,CURLOPT_URL, HOTELS_API_URL.$action);
         curl_setopt($ch,CURLOPT_POST, $param_number);
         curl_setopt($ch,CURLOPT_POSTFIELDS, $param_string);
         curl_setopt($ch, CURLOPT_HEADER, 0);
