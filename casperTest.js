@@ -12,6 +12,7 @@ utils.dump(domain);
 
 casper.test.begin('Testing hotel booking', 9, function suite(test) {
     casper.start(domain + 'bookings', function() {
+		utils.dump(casper.getPageContent());
         test.assertTitle("Bookings - Hotels", "Page title is the one expected");
         test.assertExists('#bookings div.item[data-id="1"] .title .cell', "Hotel id 1 exists");
 

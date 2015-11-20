@@ -21,6 +21,5 @@ parameters:
     site.path_library:      %site.path_www%/library
     site.hotel_api_url:     localhost:8000
     site.hotel_api_page:    hotels-api
-
     action.group_tag:       \@actiongroup
     action.rights_level:    7
