@@ -4,7 +4,7 @@
             <div class="">
                 {iteration:hotels}
                     <div class="item" data-id="{$hotels.id}">
-                        <a style="background-image: url('{$hotels.image}');" class="item-inner" data-id="{$hotels.id}">
+                        <a href="#" style="background-image: url('{$hotels.image}');" class="item-inner" data-id="{$hotels.id}">
                         </a>
                         <div class="title">
                             <div class="wrapper">
