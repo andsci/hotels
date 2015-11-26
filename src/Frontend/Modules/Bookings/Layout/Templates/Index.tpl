@@ -4,8 +4,8 @@
             <div class="">
                 {iteration:hotels}
                     <div class="item" data-id="{$hotels.id}">
-                        <div style="background-image: url('{$hotels.image}');" class="item-inner">
-                        </div>
+                        <a style="background-image: url('{$hotels.image}');" class="item-inner" data-id="{$hotels.id}">
+                        </a>
                         <div class="title">
                             <div class="wrapper">
                                 <div class="cell">

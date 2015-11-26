@@ -26,7 +26,8 @@ jsFrontend.bookings =
         var bookings = $('#bookings');
         var bookingsFilter = $('#bookings-filter');
 
-        bookings.find('.item-inner').click(function(){
+        bookings.find('.item-inner').click(function(e){
+            e.preventDefault();
             var item = $(this).closest('.item');
             var id = item.data('id');
             var title = item.find('.title .cell').text();
