@@ -34,6 +34,7 @@ class Index extends FrontendBaseBlock
             }
         } else {
             $this->record = FrontendHotelsModel::getRecord('hotels', $this->URL->getParameter(0));
+            if(empty($this->record)) http_response_code(404);
         }
 
     }

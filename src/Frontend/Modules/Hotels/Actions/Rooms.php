@@ -41,6 +41,7 @@ class Rooms extends FrontendBaseBlock
     private function getData()
     {
         $this->room = FrontendHotelsModel::getRoom($this->id);
+        if(empty($this->room))http_response_code(404);
     }
 
     private function saveData()
