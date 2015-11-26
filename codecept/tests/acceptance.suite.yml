@@ -1,0 +1,6 @@
+class_name: AcceptanceTester
+modules:
+    enabled:
+        - PhpBrowser:
+            url: http://andriuss.ktu.ongr.rocks/
+        - \Helper\Acceptance
