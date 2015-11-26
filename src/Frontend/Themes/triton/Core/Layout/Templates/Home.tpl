@@ -31,8 +31,8 @@
 
 {* Theme specific Javascript *}
 <script src="{$THEME_URL}/Core/Js/triton.js"></script>
-<script src="{$THEME_URL}/Core/Js/Plugins/bootstrap.min.js"></script>
-<script src="{$THEME_URL}/Core/Js/Plugins/bootstrap-datepicker.js"></script>
+<script src="{$THEME_URL}/Core/Js/plugins/bootstrap.min.js"></script>
+<script src="{$THEME_URL}/Core/Js/plugins/bootstrap-datepicker.js"></script>
 
 {* Site wide HTML *}
 {$siteHTMLFooter}
