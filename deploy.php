@@ -2,6 +2,8 @@
 
 require_once 'recipe/common.php';
 
+set('keep_releases', 1);
+
 // Symfony shared dirs
 set('shared_dirs', ['app/logs', 'src/Frontend/Files']);
 // Symfony shared files
