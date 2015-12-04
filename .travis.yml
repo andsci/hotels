@@ -4,11 +4,6 @@ php:
 services:
   - mysql
 before_script:
-  # apache configuration
-  #- sudo apt-get update
-  #- sudo apt-get install apache2
-  #- sudo a2enmod rewrite
-  #- sudo /etc/init.d/apache2 restart
   # database creation
   - mysql -e "create database hotels;"
   - mysql hotels < hotels.sql
@@ -18,5 +13,8 @@ before_script:
 script:
 #  - bin/phpcs -p --standard=PSR2 --extensions=php ./src
   - php -S 127.0.0.1:8000 &
+# codeception
+  - php codecept.phar run
+# casper js
   - echo "http://127.0.0.1:8000/" > casperDomain.txt
   - casperjs test casperTest.js
