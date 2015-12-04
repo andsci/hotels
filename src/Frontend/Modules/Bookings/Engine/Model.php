@@ -8,13 +8,24 @@ class Model extends  BasicModel
 {
     const API_SECRET = '';
 
-    private static function getData($action = '', $id = null, $params = '')
+    private static function getData($action = '', $id = null, $param_string = '', $param_number = 0)
     {
         if($action) $action = '/'.$action;
         if($id) $action = $action. '/'.$id;
 
-        $r = file_get_contents(HOTELS_API_URL.'/'.HOTELS_API_PAGE.$action.$params);
-        $data = json_decode($r, true);
+//        $r = file_get_contents(HOTELS_API_URL.'/'.HOTELS_API_PAGE.$action.$params);
+//
+        $url = HOTELS_API_URL.'/'.HOTELS_API_PAGE.$action;
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_POST, $param_number);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $param_string);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_HEADER, false);
+        $data = curl_exec($curl);
+        curl_close($curl);
+
+        $data = json_decode($data, true);
 
         return $data;
     }
@@ -52,9 +63,9 @@ class Model extends  BasicModel
 
     public static function getRooms($hotelId, $arival, $departure)
     {
-        $params = '?start='.$arival.'&end='.$departure;
+        $params = 'start='.$arival.'&end='.$departure;
 
-        $data = self::getData('Detail', $hotelId, $params);
+        $data = self::getData('Detail', $hotelId, $params, 2);
 
         return $data;
     }
