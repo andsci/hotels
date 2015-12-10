@@ -15,22 +15,8 @@ env('env', 'prod');
 
 
 // Adding support for the Symfony3 directory structure
-//set('bin_dir', 'app');
-//set('var_dir', 'app');
-
-/**
- * Create cache dir
- */
-task('deploy:create_cache_dir', function () {
-    // Set cache dir
-    env('cache_dir', '{{release_path}}/' . trim(get('var_dir'), '/') . '/cache');
-    // Remove cache dir if it exist
-    run('if [ -d "{{cache_dir}}" ]; then rm -rf {{cache_dir}}; fi');
-    // Create cache dir
-    run('mkdir -p {{cache_dir}}');
-    // Set rights
-    run("chmod -R g+w {{cache_dir}}");
-})->desc('Create cache dir');
+set('bin_dir', 'app');
+set('var_dir', 'app');
 
 /**
  * Dump all assets to the filesystem
@@ -46,6 +32,49 @@ task('deploy:cache:warmup', function () {
     run('php {{release_path}}/' . trim(get('bin_dir'), '/') . '/console cache:warmup  --env={{env}} --no-debug');
 })->desc('Warm up cache');
 
+/**
+ * Create cache dir
+ */
+task('deploy:create_cache_dir', function () {
+    // Set cache dir
+    env('cache_dir', '{{release_path}}/' . trim(get('var_dir'), '/') . '/cache');
+    // Remove cache dir if it exist
+    run('if [ -d "{{cache_dir}}" ]; then rm -rf {{cache_dir}}; fi');
+    // Create cache dir
+    run('mkdir -p {{cache_dir}}');
+    run('mkdir -p {{cache_dir}}/prod');
+    // Set rights
+    run("chmod -R 777 {{cache_dir}}");
+
+    env('frontend_cache', '{{release_path}}/src/Frontend/Cache');
+    env('backend_cache', '{{release_path}}/src/Backend/Cache');
+
+    run("chmod -R 777 {{frontend_cache}}");
+    run("chmod -R 777 {{backend_cache}}");
+})->desc('Create cache dir');
+
+task('deploy:create_session_dir', function () {
+    // Set cache dir
+    env('session_dir', '{{release_path}}/app/sessions');
+    // Remove cache dir if it exist
+    run('if [ -d "{{session_dir}}" ]; then rm -rf {{session_dir}}; fi');
+    // Create cache dir
+    run('mkdir -p {{session_dir}}');
+    // Set rights
+    run("chmod -R 777 {{session_dir}}");
+})->desc('Create session dir');
+
+task('deploy:create_logs_dir', function () {
+    // Set cache dir
+    env('logs_dir', '{{release_path}}/app/logs');
+    // Remove cache dir if it exist
+    run('if [ -d "{{logs_dir}}" ]; then rm -rf {{logs_dir}}; fi');
+    // Create cache dir
+    run('mkdir -p {{logs_dir}}');
+    // Set rights
+    run("chmod -R 777 {{logs_dir}}");
+})->desc('Create logs dir');
+
 
 task('deploy', [
     'deploy:prepare',
@@ -54,26 +83,12 @@ task('deploy', [
     'deploy:shared',
     'deploy:vendors',
     'deploy:symlink',
+    'deploy:create_cache_dir',
+    'deploy:create_session_dir',
+    'deploy:create_logs_dir',
     'cleanup',
 ])->desc('Deploy your project');
 
-/**
- * Main task
-
-task('deploy', [
-'deploy:prepare',
-'deploy:release',
-'deploy:update_code',
-'deploy:create_cache_dir',
-'deploy:shared',
-'deploy:writable',
-'deploy:vendors',
-'deploy:assetic:dump',
-'deploy:cache:warmup',
-'deploy:symlink',
-'cleanup',
-])->desc('Deploy your project');
- */
 after('deploy', 'success');
 
 
