@@ -19,7 +19,7 @@ parameters:
     site.default_language:  en
     site.path_www:          %kernel.root_dir%/..
     site.path_library:      %site.path_www%/library
-    site.hotel_api_url:     127.0.0.1:8000
+    site.hotel_api_url:     andriuss.ktu.ongr.rocks
     site.hotel_api_page:    hotels-api
     action.group_tag:       \@actiongroup
     action.rights_level:    7
